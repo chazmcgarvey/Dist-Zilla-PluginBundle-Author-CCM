@@ -1,0 +1,12 @@
+*.bs
+*.o
+*.tar*
+*~
+/.build
+/.perl-version
+/Dist-Zilla-PluginBundle-Author-CCM-*
+/MYMETA.*
+/Makefile
+/blib
+/local*
+/pm_to_blib
