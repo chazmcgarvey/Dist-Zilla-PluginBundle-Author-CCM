@@ -124,6 +124,22 @@ use Dist::Zilla::Util;
 use Moose;
 use namespace::autoclean;
 
+=attr authority
+
+Specify the release authority. Defaults to C<cpan:CCM>.
+
+=cut
+
+has authority => (
+    is      => 'ro',
+    isa     => 'Str',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        $self->payload->{'Authority.authority'} // $self->payload->{authority} // 'cpan:CCM';
+    },
+);
+
 =attr installer
 
 Specify which installer to use, such as:
@@ -224,7 +240,7 @@ sub configure {
         ['Test::ReportPrereqs'],
 
         # METADATA
-        ['Authority' => {do_munging => 0}],
+        ['Authority' => {authority => $self->authority, do_munging => 0}],
         ['MetaJSON'],
         ['MetaYAML'],
         ['MetaNoIndex' => {directory => [@no_index]}],
