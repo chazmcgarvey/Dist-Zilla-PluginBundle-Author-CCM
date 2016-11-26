@@ -4,7 +4,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 # VERSION
 
-version 0.002
+version 0.003
 
 # SYNOPSIS
 
@@ -112,6 +112,10 @@ You probably don't want to use this.
     remotes_must_exist  = 0
 
 # ATTRIBUTES
+
+## authority
+
+Specify the release authority. Defaults to `cpan:CCM`.
 
 ## installer
 

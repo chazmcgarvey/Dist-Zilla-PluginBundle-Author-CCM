@@ -2,6 +2,11 @@ Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
 {{$NEXT}}
 
+0.003     2016-11-26 00:09:53-07:00 MST7MDT
+
+  * Set default authority to cpan:CCM
+  * Add Test::CPAN::Meta to prereqs
+
 0.002     2016-11-25 22:12:27-07:00 MST7MDT
 
   * Add DZIL_NO_UPLOAD to enable no_upload mode
