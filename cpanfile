@@ -70,3 +70,4 @@ requires 'Pod::Weaver::Section::Legal';
 requires 'Pod::Weaver::Section::Name';
 requires 'Pod::Weaver::Section::Region';
 requires 'Pod::Weaver::Section::Version';
+requires 'Test::CPAN::Meta';

@@ -91,6 +91,7 @@ my %WriteMakefileArgs = (
     "Pod::Weaver::Section::Name" => 0,
     "Pod::Weaver::Section::Region" => 0,
     "Pod::Weaver::Section::Version" => 0,
+    "Test::CPAN::Meta" => 0,
     "namespace::autoclean" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -103,7 +104,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "blib" => "1.01"
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -189,6 +190,7 @@ my %FallbackPrereqs = (
   "Pod::Weaver::Section::Name" => 0,
   "Pod::Weaver::Section::Region" => 0,
   "Pod::Weaver::Section::Version" => 0,
+  "Test::CPAN::Meta" => 0,
   "Test::More" => 0,
   "blib" => "1.01",
   "namespace::autoclean" => 0,

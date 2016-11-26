@@ -6,11 +6,22 @@ package Dist::Zilla::PluginBundle::Author::CCM;
 use warnings;
 use strict;
 
-our $VERSION = '0.002'; # VERSION
+our $VERSION = '0.003'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
 use namespace::autoclean;
+
+
+has authority => (
+    is      => 'ro',
+    isa     => 'Str',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        $self->payload->{'Authority.authority'} // $self->payload->{authority} // 'cpan:CCM';
+    },
+);
 
 
 has installer => (
@@ -88,7 +99,7 @@ sub configure {
         ['Test::ReportPrereqs'],
 
         # METADATA
-        ['Authority' => {do_munging => 0}],
+        ['Authority' => {authority => $self->authority, do_munging => 0}],
         ['MetaJSON'],
         ['MetaYAML'],
         ['MetaNoIndex' => {directory => [@no_index]}],
@@ -156,7 +167,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -264,6 +275,10 @@ You probably don't want to use this.
     remotes_must_exist  = 0
 
 =head1 ATTRIBUTES
+
+=head2 authority
+
+Specify the release authority. Defaults to C<cpan:CCM>.
 
 =head2 installer
 
