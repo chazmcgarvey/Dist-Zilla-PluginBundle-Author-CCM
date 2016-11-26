@@ -4,7 +4,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 # VERSION
 
-version 0.001
+version 0.002
 
 # SYNOPSIS
 
@@ -21,9 +21,6 @@ You probably don't want to use this.
     [ReversionOnRelease]
     prompt              = 1
 
-    [ExecDir]
-    [ExtraTests]
-
     ; GATHER
     [Git::GatherDir]
     exclude_filename    = LICENSE
@@ -34,6 +31,7 @@ You probably don't want to use this.
 
     [CopyFilesFromBuild]
     copy                = LICENSE
+    [ExecDir]
 
     ; PREREQS
     [AutoPrereqs]
@@ -83,6 +81,7 @@ You probably don't want to use this.
     filename            = README.md
     locaton             = root
     type                = markdown
+    phase               = release
     [ReadmeAnyFromPod]
     filename            = README
     location            = build
@@ -96,6 +95,7 @@ You probably don't want to use this.
     ; RELEASE
     [CheckChangesHasContent]
     [Git::Check]
+    [RunExtraTests]
     [TestRelease]
     [ConfirmRelease]
     [UploadToCPAN]              ; disable with the "no_upload" attribute
@@ -126,7 +126,7 @@ Disable plugins that use the network, and prevent releasing.
 
 ## no\_upload
 
-Do not upload to CPAN.
+Do not upload to CPAN or git push.
 
 # METHODS
 

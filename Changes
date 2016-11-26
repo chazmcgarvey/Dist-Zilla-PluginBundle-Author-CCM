@@ -2,6 +2,14 @@ Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
 {{$NEXT}}
 
+0.002     2016-11-25 22:12:27-07:00 MST7MDT
+
+  * Add DZIL_NO_UPLOAD to enable no_upload mode
+  * Only rewrite repo README on release
+  * Use RunExtraTests instead of ExtraTests
+  * Use Bootstrap::lib
+  * Require Dist::Zilla 5.038 (for :ExtraTestFiles)
+
 0.001     2016-11-25 18:28:13-07:00 MST7MDT
 
   * Initial version
