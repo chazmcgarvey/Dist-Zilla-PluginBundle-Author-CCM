@@ -53,7 +53,7 @@ requires 'Dist::Zilla::Plugin::Test::Pod::No404s';
 requires 'Dist::Zilla::Plugin::Test::Portability';
 requires 'Dist::Zilla::Plugin::Test::ReportPrereqs';
 requires 'Dist::Zilla::Plugin::TestRelease';
-requires 'Dist::Zilla::Plugin::TravisYML';
+requires 'Dist::Zilla::Plugin::TravisCI';
 requires 'Dist::Zilla::Plugin::UploadToCPAN';
 requires 'Pod::Elemental::Transformer::List';
 requires 'Pod::Elemental::Transformer::Verbatim';

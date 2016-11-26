@@ -82,7 +82,7 @@ You probably don't want to use this.
     filename            = README
     location            = build
     type                = text
-    [TravisYML]
+    [TravisCI] TODO
     [Manifest]
     [ManifestSkip]
 
@@ -200,7 +200,8 @@ sub configure {
     my @network_plugins = qw(Git::Push Test::Pod::No404s UploadToCPAN);
     my @gather_exclude  = (@copy_from_build, qw(README.md));
     my @gather_prune    = qw(dist.ini);
-    my @no_index        = qw(eg share shares t xt);
+    my @gather_noprune  = qw(.travis.yml);
+    my @no_index        = qw(eg share shares t xt .travis.yml);
     my @allow_dirty     = (@copy_from_build, qw(.travis.yml Changes LICENSE README.md));
     my @git_remotes     = qw(github origin);
     my @check_files     = qw(:InstallModules :ExecFiles :TestFiles :ExtraTestFiles);
@@ -214,7 +215,7 @@ sub configure {
 
         # GATHER
         ['Git::GatherDir' => {exclude_filename  => [@gather_exclude]}],
-        ['PruneCruft'],
+        ['PruneCruft' => {except => [@gather_noprune]}],
         ['PruneFiles' => {filename => [@gather_prune]}],
 
         ['CopyFilesFromBuild' => {copy => [@copy_from_build]}],
@@ -257,7 +258,8 @@ sub configure {
         ['License'],
         ['ReadmeAnyFromPod' => 'repo readme' => {filename => 'README.md', location => 'root', type => 'markdown', phase => 'release'}],
         ['ReadmeAnyFromPod' => 'dist readme' => {filename => 'README', location => 'build', type => 'text'}],
-        ['TravisYML'],
+        ['TravisCI' => 'repo travis' => {perl_version => [qw(5.24 5.22 5.20 5.18 5.16 5.14)]}],
+        ['TravisCI' => 'dist travis' => {write_to => 'build'}],
         ['Manifest'],
         ['ManifestSkip'],
 
