@@ -157,7 +157,7 @@ has airplane => (
 
 =attr no_upload
 
-Do not upload to CPAN.
+Do not upload to CPAN or git push.
 
 =cut
 
@@ -165,7 +165,7 @@ has no_upload => (
     is      => 'ro',
     isa     => 'Bool',
     lazy    => 1,
-    default => 0,
+    default => sub { $ENV{DZIL_NO_UPLOAD} // shift->payload->{no_upload} // 0 },
 );
 
 =method configure
@@ -176,6 +176,10 @@ Required by L<Dist::Zilla::Role::PluginBundle::Easy>.
 
 sub configure {
     my $self = shift;
+
+    if ($self->no_upload) {
+        print '[@Author::CCM] WARNING! WARNING! WARNING! *** You are in no_upload mode!! ***', "\n";
+    }
 
     my @copy_from_build = qw(LICENSE);
     my @network_plugins = qw(Git::Push Test::Pod::No404s UploadToCPAN);
@@ -255,7 +259,7 @@ sub configure {
         ['Git::Commit' => {allow_dirty => [@allow_dirty], commit_msg => 'Release %N %v%t%n%n%c'}],
         ['Git::CommitBuild' => {branch => '', release_branch => 'dist', release_message => 'Version %v%t'}],
         ['Git::Tag' => {tag_message => 'Version %v%t%n%n%c'}],
-        ['Git::Push' => {push_to => 'origin master +master:refs/heads/release +dist', remotes_must_exist => 0}],
+        $self->no_upload ? () : ['Git::Push' => {push_to => 'origin master +master:refs/heads/release +dist', remotes_must_exist => 0}],
 
     );
 
