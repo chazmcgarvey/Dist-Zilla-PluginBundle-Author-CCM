@@ -1,11 +1,3 @@
-
-BEGIN {
-  unless ($ENV{AUTHOR_TESTING}) {
-    print qq{1..0 # SKIP these tests are for testing by the author\n};
-    exit
-  }
-}
-
 use strict;
 use warnings;
 
@@ -21,16 +13,16 @@ my @files = (
     't/00-report-prereqs.dd',
     't/00-report-prereqs.t',
     't/01-basic.t',
-    't/author-clean-namespaces.t',
-    't/author-critic.t',
-    't/author-eol.t',
-    't/author-no-tabs.t',
-    't/author-pod-coverage.t',
-    't/author-pod-no404s.t',
-    't/author-pod-syntax.t',
-    't/author-portability.t',
-    't/release-cpan-changes.t',
-    't/release-distmeta.t'
+    'xt/author/clean-namespaces.t',
+    'xt/author/critic.t',
+    'xt/author/eol.t',
+    'xt/author/no-tabs.t',
+    'xt/author/pod-coverage.t',
+    'xt/author/pod-no404s.t',
+    'xt/author/pod-syntax.t',
+    'xt/author/portability.t',
+    'xt/release/cpan-changes.t',
+    'xt/release/distmeta.t'
 );
 
 eol_unix_ok($_, { trailing_whitespace => 1 }) foreach @files;

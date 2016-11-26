@@ -6,7 +6,7 @@ package Dist::Zilla::PluginBundle::Author::CCM;
 use warnings;
 use strict;
 
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '0.002'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
@@ -33,12 +33,16 @@ has no_upload => (
     is      => 'ro',
     isa     => 'Bool',
     lazy    => 1,
-    default => 0,
+    default => sub { $ENV{DZIL_NO_UPLOAD} // shift->payload->{no_upload} // 0 },
 );
 
 
 sub configure {
     my $self = shift;
+
+    if ($self->no_upload) {
+        print '[@Author::CCM] WARNING! WARNING! WARNING! *** You are in no_upload mode!! ***', "\n";
+    }
 
     my @copy_from_build = qw(LICENSE);
     my @network_plugins = qw(Git::Push Test::Pod::No404s UploadToCPAN);
@@ -56,15 +60,13 @@ sub configure {
         ['NextRelease'],
         ['ReversionOnRelease' => {prompt => 1}],
 
-        ['ExecDir'],
-        ['ExtraTests'],
-
         # GATHER
         ['Git::GatherDir' => {exclude_filename  => [@gather_exclude]}],
         ['PruneCruft'],
         ['PruneFiles' => {filename => [@gather_prune]}],
 
         ['CopyFilesFromBuild' => {copy => [@copy_from_build]}],
+        ['ExecDir'],
 
         # PREREQS
         ['AutoPrereqs'],
@@ -101,7 +103,7 @@ sub configure {
 
         # GENERATE FILES
         ['License'],
-        ['ReadmeAnyFromPod' => 'repo readme' => {filename => 'README.md', location => 'root', type => 'markdown'}],
+        ['ReadmeAnyFromPod' => 'repo readme' => {filename => 'README.md', location => 'root', type => 'markdown', phase => 'release'}],
         ['ReadmeAnyFromPod' => 'dist readme' => {filename => 'README', location => 'build', type => 'text'}],
         ['TravisYML'],
         ['Manifest'],
@@ -112,13 +114,14 @@ sub configure {
         # RELEASE
         ['CheckChangesHasContent'],
         ['Git::Check' => {allow_dirty => [@allow_dirty], untracked_files => 'ignore'}],
+        ['RunExtraTests'],
         ['TestRelease'],
         # ['ConfirmRelease'],
         $self->no_upload ? ['FakeRelease'] : ['UploadToCPAN'],
         ['Git::Commit' => {allow_dirty => [@allow_dirty], commit_msg => 'Release %N %v%t%n%n%c'}],
         ['Git::CommitBuild' => {branch => '', release_branch => 'dist', release_message => 'Version %v%t'}],
         ['Git::Tag' => {tag_message => 'Version %v%t%n%n%c'}],
-        ['Git::Push' => {push_to => 'origin master +master:refs/heads/release +dist', remotes_must_exist => 0}],
+        $self->no_upload ? () : ['Git::Push' => {push_to => 'origin master +master:refs/heads/release +dist', remotes_must_exist => 0}],
 
     );
 
@@ -153,7 +156,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -170,9 +173,6 @@ You probably don't want to use this.
     [ReversionOnRelease]
     prompt              = 1
 
-    [ExecDir]
-    [ExtraTests]
-
     ; GATHER
     [Git::GatherDir]
     exclude_filename    = LICENSE
@@ -183,6 +183,7 @@ You probably don't want to use this.
 
     [CopyFilesFromBuild]
     copy                = LICENSE
+    [ExecDir]
 
     ; PREREQS
     [AutoPrereqs]
@@ -232,6 +233,7 @@ You probably don't want to use this.
     filename            = README.md
     locaton             = root
     type                = markdown
+    phase               = release
     [ReadmeAnyFromPod]
     filename            = README
     location            = build
@@ -245,6 +247,7 @@ You probably don't want to use this.
     ; RELEASE
     [CheckChangesHasContent]
     [Git::Check]
+    [RunExtraTests]
     [TestRelease]
     [ConfirmRelease]
     [UploadToCPAN]              ; disable with the "no_upload" attribute
@@ -284,7 +287,7 @@ Disable plugins that use the network, and prevent releasing.
 
 =head2 no_upload
 
-Do not upload to CPAN.
+Do not upload to CPAN or git push.
 
 =head1 METHODS
 

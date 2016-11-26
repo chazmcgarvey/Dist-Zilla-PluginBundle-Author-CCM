@@ -5,7 +5,7 @@ NAME
 
 VERSION
 
-    version 0.001
+    version 0.002
 
 SYNOPSIS
 
@@ -22,9 +22,6 @@ DESCRIPTION
         [ReversionOnRelease]
         prompt              = 1
     
-        [ExecDir]
-        [ExtraTests]
-    
         ; GATHER
         [Git::GatherDir]
         exclude_filename    = LICENSE
@@ -35,6 +32,7 @@ DESCRIPTION
     
         [CopyFilesFromBuild]
         copy                = LICENSE
+        [ExecDir]
     
         ; PREREQS
         [AutoPrereqs]
@@ -84,6 +82,7 @@ DESCRIPTION
         filename            = README.md
         locaton             = root
         type                = markdown
+        phase               = release
         [ReadmeAnyFromPod]
         filename            = README
         location            = build
@@ -97,6 +96,7 @@ DESCRIPTION
         ; RELEASE
         [CheckChangesHasContent]
         [Git::Check]
+        [RunExtraTests]
         [TestRelease]
         [ConfirmRelease]
         [UploadToCPAN]              ; disable with the "no_upload" attribute
@@ -128,7 +128,7 @@ ATTRIBUTES
 
  no_upload
 
-    Do not upload to CPAN.
+    Do not upload to CPAN or git push.
 
 METHODS
 
