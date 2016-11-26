@@ -17,9 +17,6 @@ You probably don't want to use this.
     [ReversionOnRelease]
     prompt              = 1
 
-    [ExecDir]
-    [ExtraTests]
-
     ; GATHER
     [Git::GatherDir]
     exclude_filename    = LICENSE
@@ -30,6 +27,7 @@ You probably don't want to use this.
 
     [CopyFilesFromBuild]
     copy                = LICENSE
+    [ExecDir]
 
     ; PREREQS
     [AutoPrereqs]
@@ -93,6 +91,7 @@ You probably don't want to use this.
     ; RELEASE
     [CheckChangesHasContent]
     [Git::Check]
+    [RunExtraTests]
     [TestRelease]
     [ConfirmRelease]
     [UploadToCPAN]              ; disable with the "no_upload" attribute
@@ -197,15 +196,13 @@ sub configure {
         ['NextRelease'],
         ['ReversionOnRelease' => {prompt => 1}],
 
-        ['ExecDir'],
-        ['ExtraTests'],
-
         # GATHER
         ['Git::GatherDir' => {exclude_filename  => [@gather_exclude]}],
         ['PruneCruft'],
         ['PruneFiles' => {filename => [@gather_prune]}],
 
         ['CopyFilesFromBuild' => {copy => [@copy_from_build]}],
+        ['ExecDir'],
 
         # PREREQS
         ['AutoPrereqs'],
@@ -253,6 +250,7 @@ sub configure {
         # RELEASE
         ['CheckChangesHasContent'],
         ['Git::Check' => {allow_dirty => [@allow_dirty], untracked_files => 'ignore'}],
+        ['RunExtraTests'],
         ['TestRelease'],
         # ['ConfirmRelease'],
         $self->no_upload ? ['FakeRelease'] : ['UploadToCPAN'],
