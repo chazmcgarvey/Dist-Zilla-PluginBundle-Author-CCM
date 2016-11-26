@@ -79,6 +79,7 @@ You probably don't want to use this.
     filename            = README.md
     locaton             = root
     type                = markdown
+    phase               = release
     [ReadmeAnyFromPod]
     filename            = README
     location            = build
@@ -237,7 +238,7 @@ sub configure {
 
         # GENERATE FILES
         ['License'],
-        ['ReadmeAnyFromPod' => 'repo readme' => {filename => 'README.md', location => 'root', type => 'markdown'}],
+        ['ReadmeAnyFromPod' => 'repo readme' => {filename => 'README.md', location => 'root', type => 'markdown', phase => 'release'}],
         ['ReadmeAnyFromPod' => 'dist readme' => {filename => 'README', location => 'build', type => 'text'}],
         ['TravisYML'],
         ['Manifest'],
