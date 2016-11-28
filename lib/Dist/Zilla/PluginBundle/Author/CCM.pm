@@ -7,7 +7,7 @@ use 5.014;
 use warnings;
 use strict;
 
-our $VERSION = '0.005'; # VERSION
+our $VERSION = '0.006'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
@@ -66,6 +66,27 @@ sub configure {
 
     if ($self->no_upload) {
         say '[@Author::CCM] WARNING! WARNING! WARNING! *** You are in no_upload mode!! ***';
+    }
+
+    if (!$self->payload->{'TravisYML.support_builddir'}) {
+        # swap perl_version and perl_version_build because DZP::TravisYML got it backwards!
+        # https://github.com/SineSwiper/Dist-Zilla-TravisCI/pull/40
+
+        my $tmp = $self->payload->{'TravisYML.perl_version_build'};
+        if (defined $self->payload->{'TravisYML.perl_version'}) {
+            $self->payload->{'TravisYML.perl_version_build'} = $self->payload->{'TravisYML.perl_version'}
+        }
+        else {
+            delete $self->payload->{'TravisYML.perl_version_build'};
+        }
+        if (defined $tmp) {
+            $self->payload->{'TravisYML.perl_version'} = $tmp;
+        }
+        else {
+            delete $self->payload->{'TravisYML.perl_version'};
+        }
+
+        ($perl_version, $perl_version_build) = ($perl_version_build, $perl_version);
     }
 
     my @plugins = (
@@ -172,7 +193,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
