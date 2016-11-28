@@ -4,7 +4,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 # VERSION
 
-version 0.003
+version 0.004
 
 # SYNOPSIS
 
@@ -45,6 +45,8 @@ You probably don't want to use this.
     [PodSyntaxTests]
     [Test::Pod::No404s]
     [Test::Compile]
+    [Test::MinimumVersion]
+    max_target_perl     = 5.10.1
     [Test::EOL]
     [Test::NoTabs]
     [Test::Perl::Critic]
@@ -87,6 +89,7 @@ You probably don't want to use this.
     location            = build
     type                = text
     [TravisYML]
+    build_branch        = /^(dist|build\/.*)$/
     [Manifest]
     [ManifestSkip]
 
