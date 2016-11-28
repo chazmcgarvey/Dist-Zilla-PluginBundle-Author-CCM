@@ -1,5 +1,10 @@
 Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
+0.005     2016-11-27 19:52:27-07:00 MST7MDT
+
+  * Move dependencies from cpanfile to dist.ini (fixes testing)
+  * Set copyright year
+
 0.004     2016-11-27 18:28:43-07:00 MST7MDT
 
   * This bundle now requires at least perl 5.14.0

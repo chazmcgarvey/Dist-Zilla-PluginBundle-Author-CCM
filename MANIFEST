@@ -7,7 +7,6 @@ META.json
 META.yml
 Makefile.PL
 README
-cpanfile
 lib/Dist/Zilla/PluginBundle/Author/CCM.pm
 lib/Pod/Weaver/PluginBundle/Author/CCM.pm
 t/00-compile.t
