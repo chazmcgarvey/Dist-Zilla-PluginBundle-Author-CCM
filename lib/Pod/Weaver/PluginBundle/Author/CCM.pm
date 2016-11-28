@@ -26,6 +26,7 @@ This module was heavily inspired by Karen Etheridge's config.
 
 =cut
 
+use 5.008;
 use warnings;
 use strict;
 

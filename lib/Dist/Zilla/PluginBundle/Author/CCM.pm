@@ -41,6 +41,8 @@ You probably don't want to use this.
     [PodSyntaxTests]
     [Test::Pod::No404s]
     [Test::Compile]
+    [Test::MinimumVersion]
+    max_target_perl     = 5.10.1
     [Test::EOL]
     [Test::NoTabs]
     [Test::Perl::Critic]
@@ -83,6 +85,7 @@ You probably don't want to use this.
     location            = build
     type                = text
     [TravisYML]
+    build_branch        = /^(dist|build\/.*)$/
     [Manifest]
     [ManifestSkip]
 
@@ -115,6 +118,7 @@ You probably don't want to use this.
 
 =cut
 
+use 5.014;
 use warnings;
 use strict;
 
@@ -192,18 +196,21 @@ Required by L<Dist::Zilla::Role::PluginBundle::Easy>.
 sub configure {
     my $self = shift;
 
-    if ($self->no_upload) {
-        print '[@Author::CCM] WARNING! WARNING! WARNING! *** You are in no_upload mode!! ***', "\n";
-    }
+    my @copy_from_build     = qw(LICENSE);
+    my @network_plugins     = qw(Git::Push Test::Pod::No404s UploadToCPAN);
+    my @gather_exclude      = (@copy_from_build, qw(README.md));
+    my @gather_prune        = qw(dist.ini);
+    my @no_index            = qw(eg share shares t xt);
+    my @allow_dirty         = (@copy_from_build, qw(.travis.yml Changes LICENSE README.md));
+    my @git_remotes         = qw(github origin);
+    my @check_files         = qw(:InstallModules :ExecFiles :TestFiles :ExtraTestFiles);
+    my $perl_version_target = '5.10.1';
+    my $perl_version        = '5.24 5.22 5.20 5.18 5.16 5.14';
+    my $perl_version_build  = $perl_version . ' 5.12 5.10 -5.8';
 
-    my @copy_from_build = qw(LICENSE);
-    my @network_plugins = qw(Git::Push Test::Pod::No404s UploadToCPAN);
-    my @gather_exclude  = (@copy_from_build, qw(README.md));
-    my @gather_prune    = qw(dist.ini);
-    my @no_index        = qw(eg share shares t xt);
-    my @allow_dirty     = (@copy_from_build, qw(.travis.yml Changes LICENSE README.md));
-    my @git_remotes     = qw(github origin);
-    my @check_files     = qw(:InstallModules :ExecFiles :TestFiles :ExtraTestFiles);
+    if ($self->no_upload) {
+        say '[@Author::CCM] WARNING! WARNING! WARNING! *** You are in no_upload mode!! ***';
+    }
 
     my @plugins = (
 
@@ -232,6 +239,7 @@ sub configure {
         ['PodSyntaxTests'],
         ['Test::Pod::No404s'],
         ['Test::Compile'],
+        ['Test::MinimumVersion' => {max_target_perl => $perl_version_target}],
         ['Test::EOL' => {finder => [@check_files]}],
         ['Test::NoTabs' => {finder => [@check_files]}],
         ['Test::Perl::Critic'],
@@ -257,7 +265,7 @@ sub configure {
         ['License'],
         ['ReadmeAnyFromPod' => 'repo readme' => {filename => 'README.md', location => 'root', type => 'markdown', phase => 'release'}],
         ['ReadmeAnyFromPod' => 'dist readme' => {filename => 'README', location => 'build', type => 'text'}],
-        ['TravisYML'],
+        ['TravisYML' => {build_branch => '/^(dist|build\/.*)$/', perl_version => $perl_version, perl_version_build => $perl_version_build}],
         ['Manifest'],
         ['ManifestSkip'],
 
