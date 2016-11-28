@@ -263,8 +263,8 @@ sub configure {
 
         # GENERATE FILES
         ['License'],
-        ['ReadmeAnyFromPod' => 'repo readme' => {filename => 'README.md', location => 'root', type => 'markdown', phase => 'release'}],
-        ['ReadmeAnyFromPod' => 'dist readme' => {filename => 'README', location => 'build', type => 'text'}],
+        ['ReadmeAnyFromPod' => 'RepoReadme' => {filename => 'README.md', location => 'root', type => 'markdown', phase => 'release'}],
+        ['ReadmeAnyFromPod' => 'DistReadme' => {filename => 'README', location => 'build', type => 'text'}],
         ['TravisYML' => {build_branch => '/^(dist|build\/.*)$/', perl_version => $perl_version, perl_version_build => $perl_version_build}],
         ['Manifest'],
         ['ManifestSkip'],
