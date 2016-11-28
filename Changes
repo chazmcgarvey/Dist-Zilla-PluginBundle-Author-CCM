@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
 {{$NEXT}}
 
+0.006     2016-11-28 02:08:07-07:00 MST7MDT
+
+  * Work around a bug in DZP::TravisYML
+
 0.005     2016-11-27 19:52:27-07:00 MST7MDT
 
   * Move dependencies from cpanfile to dist.ini (fixes testing)
