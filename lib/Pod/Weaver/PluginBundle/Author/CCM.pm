@@ -2,10 +2,11 @@ package Pod::Weaver::PluginBundle::Author::CCM;
 # ABSTRACT: A plugin bundle for pod woven by CCM
 
 
+use 5.008;
 use warnings;
 use strict;
 
-our $VERSION = '0.003'; # VERSION
+our $VERSION = '0.004'; # VERSION
 
 use Pod::Weaver::Config::Assembler;
 use namespace::autoclean;
@@ -104,7 +105,7 @@ Pod::Weaver::PluginBundle::Author::CCM - A plugin bundle for pod woven by CCM
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 

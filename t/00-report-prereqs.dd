@@ -16,6 +16,7 @@ do { my $x = {
                                       'Test::CPAN::Meta' => '0',
                                       'Test::CleanNamespaces' => '0.15',
                                       'Test::EOL' => '0',
+                                      'Test::MinimumVersion' => '0',
                                       'Test::More' => '0.96',
                                       'Test::NoTabs' => '0',
                                       'Test::Pod' => '1.41',
@@ -71,6 +72,7 @@ do { my $x = {
                                       'Dist::Zilla::Plugin::Test::CleanNamespaces' => '0',
                                       'Dist::Zilla::Plugin::Test::Compile' => '0',
                                       'Dist::Zilla::Plugin::Test::EOL' => '0',
+                                      'Dist::Zilla::Plugin::Test::MinimumVersion' => '0',
                                       'Dist::Zilla::Plugin::Test::NoTabs' => '0',
                                       'Dist::Zilla::Plugin::Test::Perl::Critic' => '0',
                                       'Dist::Zilla::Plugin::Test::Pod::No404s' => '0',
@@ -102,6 +104,7 @@ do { my $x = {
                                       'Pod::Weaver::Section::Version' => '0',
                                       'Test::CPAN::Meta' => '0',
                                       'namespace::autoclean' => '0',
+                                      'perl' => '5.014',
                                       'strict' => '0',
                                       'warnings' => '0'
                                     }
@@ -116,8 +119,7 @@ do { my $x = {
                                    'IO::Handle' => '0',
                                    'IPC::Open3' => '0',
                                    'Test::More' => '0',
-                                   'blib' => '1.01',
-                                   'perl' => '5.006'
+                                   'blib' => '1.01'
                                  }
                  }
      };

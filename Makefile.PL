@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use 5.006;
+use 5.014;
 
 use ExtUtils::MakeMaker;
 
@@ -14,7 +14,7 @@ my %WriteMakefileArgs = (
   },
   "DISTNAME" => "Dist-Zilla-PluginBundle-Author-CCM",
   "LICENSE" => "perl",
-  "MIN_PERL_VERSION" => "5.006",
+  "MIN_PERL_VERSION" => "5.014",
   "NAME" => "Dist::Zilla::PluginBundle::Author::CCM",
   "PREREQ_PM" => {
     "Dist::Zilla" => "5.038",
@@ -62,6 +62,7 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Plugin::Test::CleanNamespaces" => 0,
     "Dist::Zilla::Plugin::Test::Compile" => 0,
     "Dist::Zilla::Plugin::Test::EOL" => 0,
+    "Dist::Zilla::Plugin::Test::MinimumVersion" => 0,
     "Dist::Zilla::Plugin::Test::NoTabs" => 0,
     "Dist::Zilla::Plugin::Test::Perl::Critic" => 0,
     "Dist::Zilla::Plugin::Test::Pod::No404s" => 0,
@@ -104,7 +105,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "blib" => "1.01"
   },
-  "VERSION" => "0.003",
+  "VERSION" => "0.004",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -157,6 +158,7 @@ my %FallbackPrereqs = (
   "Dist::Zilla::Plugin::Test::CleanNamespaces" => 0,
   "Dist::Zilla::Plugin::Test::Compile" => 0,
   "Dist::Zilla::Plugin::Test::EOL" => 0,
+  "Dist::Zilla::Plugin::Test::MinimumVersion" => 0,
   "Dist::Zilla::Plugin::Test::NoTabs" => 0,
   "Dist::Zilla::Plugin::Test::Perl::Critic" => 0,
   "Dist::Zilla::Plugin::Test::Pod::No404s" => 0,

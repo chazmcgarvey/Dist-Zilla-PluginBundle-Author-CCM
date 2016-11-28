@@ -47,6 +47,7 @@ requires 'Dist::Zilla::Plugin::Test::CPAN::Changes';
 requires 'Dist::Zilla::Plugin::Test::CleanNamespaces';
 requires 'Dist::Zilla::Plugin::Test::Compile';
 requires 'Dist::Zilla::Plugin::Test::EOL';
+requires 'Dist::Zilla::Plugin::Test::MinimumVersion';
 requires 'Dist::Zilla::Plugin::Test::NoTabs';
 requires 'Dist::Zilla::Plugin::Test::Perl::Critic';
 requires 'Dist::Zilla::Plugin::Test::Pod::No404s';

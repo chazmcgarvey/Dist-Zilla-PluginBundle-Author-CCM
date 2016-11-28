@@ -1,5 +1,10 @@
 Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
+0.004     2016-11-27 18:28:43-07:00 MST7MDT
+
+  * This bundle now requires at least perl 5.14.0
+  * Add Test::MinimumVersion as a release test
+
 0.003     2016-11-26 00:09:53-07:00 MST7MDT
 
   * Set default authority to cpan:CCM

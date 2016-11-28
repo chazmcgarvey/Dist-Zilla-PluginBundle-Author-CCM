@@ -5,7 +5,7 @@ NAME
 
 VERSION
 
-    version 0.003
+    version 0.004
 
 SYNOPSIS
 
@@ -46,6 +46,8 @@ DESCRIPTION
         [PodSyntaxTests]
         [Test::Pod::No404s]
         [Test::Compile]
+        [Test::MinimumVersion]
+        max_target_perl     = 5.10.1
         [Test::EOL]
         [Test::NoTabs]
         [Test::Perl::Critic]
@@ -88,6 +90,7 @@ DESCRIPTION
         location            = build
         type                = text
         [TravisYML]
+        build_branch        = /^(dist|build\/.*)$/
         [Manifest]
         [ManifestSkip]
     
