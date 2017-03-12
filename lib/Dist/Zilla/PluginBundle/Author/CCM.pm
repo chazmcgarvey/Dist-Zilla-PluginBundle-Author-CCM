@@ -13,7 +13,6 @@ You probably don't want to use this.
 
     ; VERSION
     [Git::NextVersion]
-    [NextRelease]
     [ReversionOnRelease]
     prompt              = 1
 
@@ -92,6 +91,7 @@ You probably don't want to use this.
     [MakeMaker]                 ; override with the "installer" attribute
 
     ; RELEASE
+    [NextRelease]
     [CheckChangesHasContent]
     [Git::Check]
     [RunExtraTests]
@@ -237,7 +237,6 @@ sub configure {
 
         # VERSION
         ['Git::NextVersion'],
-        ['NextRelease'],
         ['ReversionOnRelease' => {prompt => 1}],
 
         # GATHER
@@ -293,6 +292,7 @@ sub configure {
         $self->installer,     # e.g. MakeMaker
 
         # RELEASE
+        ['NextRelease'],
         ['CheckChangesHasContent'],
         ['Git::Check' => {allow_dirty => [@allow_dirty], untracked_files => 'ignore'}],
         ['RunExtraTests'],
