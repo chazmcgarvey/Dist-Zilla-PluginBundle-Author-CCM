@@ -7,7 +7,7 @@ use 5.014;
 use warnings;
 use strict;
 
-our $VERSION = '0.006'; # VERSION
+our $VERSION = '0.007'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
@@ -93,7 +93,6 @@ sub configure {
 
         # VERSION
         ['Git::NextVersion'],
-        ['NextRelease'],
         ['ReversionOnRelease' => {prompt => 1}],
 
         # GATHER
@@ -149,6 +148,7 @@ sub configure {
         $self->installer,     # e.g. MakeMaker
 
         # RELEASE
+        ['NextRelease'],
         ['CheckChangesHasContent'],
         ['Git::Check' => {allow_dirty => [@allow_dirty], untracked_files => 'ignore'}],
         ['RunExtraTests'],
@@ -193,7 +193,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 =head1 VERSION
 
-version 0.006
+version 0.007
 
 =head1 SYNOPSIS
 
@@ -206,7 +206,6 @@ You probably don't want to use this.
 
     ; VERSION
     [Git::NextVersion]
-    [NextRelease]
     [ReversionOnRelease]
     prompt              = 1
 
@@ -285,6 +284,7 @@ You probably don't want to use this.
     [MakeMaker]                 ; override with the "installer" attribute
 
     ; RELEASE
+    [NextRelease]
     [CheckChangesHasContent]
     [Git::Check]
     [RunExtraTests]

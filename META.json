@@ -4,7 +4,7 @@
       "Charles McGarvey <chazmcgarvey@brokenzipper.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 6.008, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 6.009, CPAN::Meta::Converter version 2.150005",
    "keywords" : [
       "dzil",
       "author",
@@ -160,11 +160,11 @@
    "provides" : {
       "Dist::Zilla::PluginBundle::Author::CCM" : {
          "file" : "lib/Dist/Zilla/PluginBundle/Author/CCM.pm",
-         "version" : "0.006"
+         "version" : "0.007"
       },
       "Pod::Weaver::PluginBundle::Author::CCM" : {
          "file" : "lib/Pod/Weaver/PluginBundle/Author/CCM.pm",
-         "version" : "0.006"
+         "version" : "0.007"
       }
    },
    "release_status" : "stable",
@@ -179,8 +179,8 @@
          "web" : "https://github.com/chazmcgarvey/Dist-Zilla-PluginBundle-Author-CCM"
       }
    },
-   "version" : "0.006",
+   "version" : "0.007",
    "x_authority" : "cpan:CCM",
-   "x_serialization_backend" : "Cpanel::JSON::XS version 3.0224"
+   "x_serialization_backend" : "Cpanel::JSON::XS version 3.0225"
 }
 

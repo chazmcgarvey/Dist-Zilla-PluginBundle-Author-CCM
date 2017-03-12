@@ -5,7 +5,7 @@ NAME
 
 VERSION
 
-    version 0.006
+    version 0.007
 
 SYNOPSIS
 
@@ -18,7 +18,6 @@ DESCRIPTION
 
         ; VERSION
         [Git::NextVersion]
-        [NextRelease]
         [ReversionOnRelease]
         prompt              = 1
     
@@ -97,6 +96,7 @@ DESCRIPTION
         [MakeMaker]                 ; override with the "installer" attribute
     
         ; RELEASE
+        [NextRelease]
         [CheckChangesHasContent]
         [Git::Check]
         [RunExtraTests]
