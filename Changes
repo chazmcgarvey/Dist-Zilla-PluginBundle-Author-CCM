@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
 {{$NEXT}}
 
+0.007     2017-03-11 18:33:58-07:00 MST7MDT
+
+  * Prevent writing wrong version to Changes
+
 0.006     2016-11-28 02:08:07-07:00 MST7MDT
 
   * Work around a bug in DZP::TravisYML

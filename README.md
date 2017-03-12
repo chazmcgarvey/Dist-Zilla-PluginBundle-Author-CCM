@@ -4,7 +4,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 # VERSION
 
-version 0.006
+version 0.007
 
 # SYNOPSIS
 
@@ -17,7 +17,6 @@ You probably don't want to use this.
 
     ; VERSION
     [Git::NextVersion]
-    [NextRelease]
     [ReversionOnRelease]
     prompt              = 1
 
@@ -96,6 +95,7 @@ You probably don't want to use this.
     [MakeMaker]                 ; override with the "installer" attribute
 
     ; RELEASE
+    [NextRelease]
     [CheckChangesHasContent]
     [Git::Check]
     [RunExtraTests]
