@@ -126,7 +126,24 @@ our $VERSION = '999.999'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
+use Perl::Version;
 use namespace::autoclean;
+
+=attr max_target_perl
+
+Specify the minimum perl version. Defaults to C<5.10.1>.
+
+=cut
+
+has max_target_perl => (
+    is      => 'ro',
+    isa     => 'Str',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        $self->payload->{'Test::MinimumVersion.max_target_perl'} // $self->payload->{max_target_perl} // '5.10.1';
+    },
+);
 
 =attr authority
 
@@ -158,7 +175,7 @@ has installer => (
     is      => 'ro',
     isa     => 'Str',
     lazy    => 1,
-    default => sub { shift->payload->{installer} || 'MakeMaker' },
+    default => sub { shift->payload->{installer} // 'MakeMaker' },
 );
 
 =attr airplane
@@ -204,9 +221,8 @@ sub configure {
     my @allow_dirty         = (@copy_from_build, qw(.travis.yml Changes LICENSE README.md));
     my @git_remotes         = qw(github origin);
     my @check_files         = qw(:InstallModules :ExecFiles :TestFiles :ExtraTestFiles);
-    my $perl_version_target = '5.10.1';
-    my $perl_version        = '5.24 5.22 5.20 5.18 5.16 5.14';
-    my $perl_version_build  = $perl_version . ' 5.12 5.10 -5.8';
+    my $perl_version_target = $self->max_target_perl;
+    my ($perl_version, $perl_version_build) = $self->_travis_perl_versions($perl_version_target);
 
     if ($self->no_upload) {
         say '[@Author::CCM] WARNING! WARNING! WARNING! *** You are in no_upload mode!! ***';
@@ -316,6 +332,29 @@ sub configure {
     push @plugins, 'ConfirmRelease';
 
     $self->add_plugins(@plugins);
+}
+
+sub _travis_perl_versions {
+    my $self = shift;
+
+    my $perl_version_target = Perl::Version->new(shift or die 'Missing target version');
+    my $min_version         = Perl::Version->new('5.14');
+    my $min_version_build   = Perl::Version->new($perl_version_target);
+    $min_version_build->subversion(0);
+
+    my @versions;
+    my @versions_build;
+
+    for my $v (qw{5.26 5.24 5.22 5.20 5.18 5.16 5.14 5.12 5.10 5.8}) {
+        my $version = Perl::Version->new($v);
+        push @versions,       "$version" if $version >= $min_version_build && $version >= $min_version;
+        push @versions_build, "$version" if $version >= $min_version_build;
+    }
+
+    my $perl_version       = join(' ', @versions);
+    my $perl_version_build = join(' ', @versions_build);
+
+    return ($perl_version, $perl_version_build);
 }
 
 with 'Dist::Zilla::Role::PluginBundle::Easy';
