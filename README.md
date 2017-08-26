@@ -4,7 +4,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 # VERSION
 
-version 0.007
+version 0.008
 
 # SYNOPSIS
 
@@ -115,6 +115,10 @@ You probably don't want to use this.
     remotes_must_exist  = 0
 
 # ATTRIBUTES
+
+## max\_target\_perl
+
+Specify the minimum perl version. Defaults to `5.10.1`.
 
 ## authority
 
