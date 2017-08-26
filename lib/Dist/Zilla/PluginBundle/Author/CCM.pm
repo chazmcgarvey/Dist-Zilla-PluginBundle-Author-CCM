@@ -7,7 +7,7 @@ use 5.014;
 use warnings;
 use strict;
 
-our $VERSION = '0.008'; # VERSION
+our $VERSION = '0.008001'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
@@ -227,7 +227,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 =head1 VERSION
 
-version 0.008
+version 0.008001
 
 =head1 SYNOPSIS
 
