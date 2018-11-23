@@ -7,7 +7,7 @@ use 5.014;
 use warnings;
 use strict;
 
-our $VERSION = '0.008001'; # VERSION
+our $VERSION = '0.009'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
@@ -69,42 +69,19 @@ sub configure {
     my @gather_exclude      = (@copy_from_build, qw(README.md));
     my @gather_prune        = qw(dist.ini);
     my @no_index            = qw(eg share shares t xt);
-    my @allow_dirty         = (@copy_from_build, qw(.travis.yml Changes LICENSE README.md));
+    my @allow_dirty         = (@copy_from_build, qw(Changes LICENSE README.md));
     my @git_remotes         = qw(github origin);
     my @check_files         = qw(:InstallModules :ExecFiles :TestFiles :ExtraTestFiles);
     my $perl_version_target = $self->max_target_perl;
-    my ($perl_version, $perl_version_build) = $self->_travis_perl_versions($perl_version_target);
 
     if ($self->no_upload) {
         say '[@Author::CCM] WARNING! WARNING! WARNING! *** You are in no_upload mode!! ***';
-    }
-
-    if (!$self->payload->{'TravisYML.support_builddir'}) {
-        # swap perl_version and perl_version_build because DZP::TravisYML got it backwards!
-        # https://github.com/SineSwiper/Dist-Zilla-TravisCI/pull/40
-
-        my $tmp = $self->payload->{'TravisYML.perl_version_build'};
-        if (defined $self->payload->{'TravisYML.perl_version'}) {
-            $self->payload->{'TravisYML.perl_version_build'} = $self->payload->{'TravisYML.perl_version'}
-        }
-        else {
-            delete $self->payload->{'TravisYML.perl_version_build'};
-        }
-        if (defined $tmp) {
-            $self->payload->{'TravisYML.perl_version'} = $tmp;
-        }
-        else {
-            delete $self->payload->{'TravisYML.perl_version'};
-        }
-
-        ($perl_version, $perl_version_build) = ($perl_version_build, $perl_version);
     }
 
     my @plugins = (
 
         # VERSION
         ['Git::NextVersion'],
-        ['ReversionOnRelease' => {prompt => 1}],
 
         # GATHER
         ['Git::GatherDir' => {exclude_filename  => [@gather_exclude]}],
@@ -152,7 +129,6 @@ sub configure {
         ['License'],
         ['ReadmeAnyFromPod' => 'RepoReadme' => {filename => 'README.md', location => 'root', type => 'markdown', phase => 'release'}],
         ['ReadmeAnyFromPod' => 'DistReadme' => {filename => 'README', location => 'build', type => 'text'}],
-        ['TravisYML' => {build_branch => '/^(dist|build\/.*)$/', perl_version => $perl_version, perl_version_build => $perl_version_build}],
         ['Manifest'],
         ['ManifestSkip'],
 
@@ -185,29 +161,6 @@ sub configure {
     $self->add_plugins(@plugins);
 }
 
-sub _travis_perl_versions {
-    my $self = shift;
-
-    my $perl_version_target = Perl::Version->new(shift or die 'Missing target version');
-    my $min_version         = Perl::Version->new('5.14');
-    my $min_version_build   = Perl::Version->new($perl_version_target);
-    $min_version_build->subversion(0);
-
-    my @versions;
-    my @versions_build;
-
-    for my $v (qw{5.26 5.24 5.22 5.20 5.18 5.16 5.14 5.12 5.10 5.8}) {
-        my $version = Perl::Version->new($v);
-        push @versions,       "$version" if $version >= $min_version_build && $version >= $min_version;
-        push @versions_build, "$version" if $version >= $min_version_build;
-    }
-
-    my $perl_version       = join(' ', @versions);
-    my $perl_version_build = join(' ', @versions_build);
-
-    return ($perl_version, $perl_version_build);
-}
-
 with 'Dist::Zilla::Role::PluginBundle::Easy';
 with 'Dist::Zilla::Role::PluginBundle::PluginRemover';
 with 'Dist::Zilla::Role::PluginBundle::Config::Slicer';
@@ -227,7 +180,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 =head1 VERSION
 
-version 0.008001
+version 0.009
 
 =head1 SYNOPSIS
 
@@ -240,8 +193,6 @@ You probably don't want to use this.
 
     ; VERSION
     [Git::NextVersion]
-    [ReversionOnRelease]
-    prompt              = 1
 
     ; GATHER
     [Git::GatherDir]
@@ -310,8 +261,6 @@ You probably don't want to use this.
     filename            = README
     location            = build
     type                = text
-    [TravisYML]
-    build_branch        = /^(dist|build\/.*)$/
     [Manifest]
     [ManifestSkip]
 

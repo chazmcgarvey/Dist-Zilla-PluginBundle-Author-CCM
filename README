@@ -5,7 +5,7 @@ NAME
 
 VERSION
 
-    version 0.008001
+    version 0.009
 
 SYNOPSIS
 
@@ -18,8 +18,6 @@ DESCRIPTION
 
         ; VERSION
         [Git::NextVersion]
-        [ReversionOnRelease]
-        prompt              = 1
     
         ; GATHER
         [Git::GatherDir]
@@ -88,8 +86,6 @@ DESCRIPTION
         filename            = README
         location            = build
         type                = text
-        [TravisYML]
-        build_branch        = /^(dist|build\/.*)$/
         [Manifest]
         [ManifestSkip]
     
