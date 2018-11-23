@@ -13,8 +13,6 @@ You probably don't want to use this.
 
     ; VERSION
     [Git::NextVersion]
-    [ReversionOnRelease]
-    prompt              = 1
 
     ; GATHER
     [Git::GatherDir]
@@ -229,7 +227,6 @@ sub configure {
 
         # VERSION
         ['Git::NextVersion'],
-        ['ReversionOnRelease' => {prompt => 1}],
 
         # GATHER
         ['Git::GatherDir' => {exclude_filename  => [@gather_exclude]}],
