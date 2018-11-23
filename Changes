@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
 {{$NEXT}}
 
+0.009     2018-11-22 22:46:42-07:00 MST7MDT
+
+  * Remove use of DZP::TravisYML and DZP::ReversionOnRelease
+
 0.008001  2017-08-25 22:00:56-06:00 MST7MDT
 
   * Declare new dependency on Perl::Version

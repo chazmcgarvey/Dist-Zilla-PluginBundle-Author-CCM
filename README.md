@@ -4,7 +4,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 # VERSION
 
-version 0.008001
+version 0.009
 
 # SYNOPSIS
 
@@ -17,8 +17,6 @@ You probably don't want to use this.
 
     ; VERSION
     [Git::NextVersion]
-    [ReversionOnRelease]
-    prompt              = 1
 
     ; GATHER
     [Git::GatherDir]
@@ -87,8 +85,6 @@ You probably don't want to use this.
     filename            = README
     location            = build
     type                = text
-    [TravisYML]
-    build_branch        = /^(dist|build\/.*)$/
     [Manifest]
     [ManifestSkip]
 
