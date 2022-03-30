@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
 {{$NEXT}}
 
+0.010     2022-03-29 20:09:03-06:00 America/Denver
+
+  * Add no_index option so MetaNoIndex is easily configurable
+
 0.009     2018-11-22 22:46:42-07:00 MST7MDT
 
   * Remove use of DZP::TravisYML and DZP::ReversionOnRelease

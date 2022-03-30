@@ -4,7 +4,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 # VERSION
 
-version 0.009
+version 0.010
 
 # SYNOPSIS
 
@@ -116,6 +116,12 @@ You probably don't want to use this.
 
 Specify the minimum perl version. Defaults to `5.10.1`.
 
+## no\_index
+
+Set directories to not index.
+
+Default:
+
 ## authority
 
 Specify the release authority. Defaults to `cpan:CCM`.
@@ -139,12 +145,12 @@ Do not upload to CPAN or git push.
 
 ## configure
 
-Required by [Dist::Zilla::Role::PluginBundle::Easy](https://metacpan.org/pod/Dist::Zilla::Role::PluginBundle::Easy).
+Required by [Dist::Zilla::Role::PluginBundle::Easy](https://metacpan.org/pod/Dist%3A%3AZilla%3A%3ARole%3A%3APluginBundle%3A%3AEasy).
 
 # SEE ALSO
 
-- [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
-- [Dist::Zilla::PluginBundle::Author::ETHER](https://metacpan.org/pod/Dist::Zilla::PluginBundle::Author::ETHER)
+- [Dist::Zilla](https://metacpan.org/pod/Dist%3A%3AZilla)
+- [Dist::Zilla::PluginBundle::Author::ETHER](https://metacpan.org/pod/Dist%3A%3AZilla%3A%3APluginBundle%3A%3AAuthor%3A%3AETHER)
 
 # BUGS
 
@@ -157,7 +163,7 @@ feature.
 
 # AUTHOR
 
-Charles McGarvey <chazmcgarvey@brokenzipper.com>
+Charles McGarvey <ccm@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
