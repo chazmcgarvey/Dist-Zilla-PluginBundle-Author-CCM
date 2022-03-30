@@ -137,7 +137,29 @@ has max_target_perl => (
     lazy    => 1,
     default => sub {
         my $self = shift;
-        $self->payload->{'Test::MinimumVersion.max_target_perl'} // $self->payload->{max_target_perl} // '5.10.1';
+        $self->payload->{'Test::MinimumVersion.max_target_perl'}
+            // $self->payload->{max_target_perl}
+            // '5.10.1';
+    },
+);
+
+=attr no_index
+
+Set directories to not index.
+
+Default:
+
+=cut
+
+has no_index => (
+    is      => 'ro',
+    isa     => 'ArrayRef',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        [split(/\s+/, $self->payload->{'MetaNoIndex.directories'}
+                     // $self->payload->{no_index}
+                     // 'eg share shares t xt')];
     },
 );
 
@@ -213,7 +235,7 @@ sub configure {
     my @network_plugins     = qw(Git::Push Test::Pod::No404s UploadToCPAN);
     my @gather_exclude      = (@copy_from_build, qw(README.md));
     my @gather_prune        = qw(dist.ini);
-    my @no_index            = qw(eg share shares t xt);
+    my @no_index            = @{$self->no_index};
     my @allow_dirty         = (@copy_from_build, qw(Changes LICENSE README.md));
     my @git_remotes         = qw(github origin);
     my @check_files         = qw(:InstallModules :ExecFiles :TestFiles :ExtraTestFiles);
