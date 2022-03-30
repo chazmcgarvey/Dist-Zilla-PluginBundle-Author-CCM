@@ -7,7 +7,7 @@ use 5.014;
 use warnings;
 use strict;
 
-our $VERSION = '0.009'; # VERSION
+our $VERSION = '0.010'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
@@ -21,7 +21,22 @@ has max_target_perl => (
     lazy    => 1,
     default => sub {
         my $self = shift;
-        $self->payload->{'Test::MinimumVersion.max_target_perl'} // $self->payload->{max_target_perl} // '5.10.1';
+        $self->payload->{'Test::MinimumVersion.max_target_perl'}
+            // $self->payload->{max_target_perl}
+            // '5.10.1';
+    },
+);
+
+
+has no_index => (
+    is      => 'ro',
+    isa     => 'ArrayRef',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        [split(/\s+/, $self->payload->{'MetaNoIndex.directories'}
+                     // $self->payload->{no_index}
+                     // 'eg share shares t xt')];
     },
 );
 
@@ -68,7 +83,7 @@ sub configure {
     my @network_plugins     = qw(Git::Push Test::Pod::No404s UploadToCPAN);
     my @gather_exclude      = (@copy_from_build, qw(README.md));
     my @gather_prune        = qw(dist.ini);
-    my @no_index            = qw(eg share shares t xt);
+    my @no_index            = @{$self->no_index};
     my @allow_dirty         = (@copy_from_build, qw(Changes LICENSE README.md));
     my @git_remotes         = qw(github origin);
     my @check_files         = qw(:InstallModules :ExecFiles :TestFiles :ExtraTestFiles);
@@ -180,7 +195,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 =head1 VERSION
 
-version 0.009
+version 0.010
 
 =head1 SYNOPSIS
 
@@ -292,6 +307,12 @@ You probably don't want to use this.
 
 Specify the minimum perl version. Defaults to C<5.10.1>.
 
+=head2 no_index
+
+Set directories to not index.
+
+Default:
+
 =head2 authority
 
 Specify the release authority. Defaults to C<cpan:CCM>.
@@ -351,7 +372,7 @@ feature.
 
 =head1 AUTHOR
 
-Charles McGarvey <chazmcgarvey@brokenzipper.com>
+Charles McGarvey <ccm@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

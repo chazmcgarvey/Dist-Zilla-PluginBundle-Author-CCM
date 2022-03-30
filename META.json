@@ -1,10 +1,10 @@
 {
    "abstract" : "A plugin bundle for distributions built by CCM",
    "author" : [
-      "Charles McGarvey <chazmcgarvey@brokenzipper.com>"
+      "Charles McGarvey <ccm@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 6.012, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Dist::Zilla version 6.024, CPAN::Meta::Converter version 2.150010",
    "keywords" : [
       "dzil",
       "author",
@@ -158,11 +158,11 @@
    "provides" : {
       "Dist::Zilla::PluginBundle::Author::CCM" : {
          "file" : "lib/Dist/Zilla/PluginBundle/Author/CCM.pm",
-         "version" : "0.009"
+         "version" : "0.010"
       },
       "Pod::Weaver::PluginBundle::Author::CCM" : {
          "file" : "lib/Pod/Weaver/PluginBundle/Author/CCM.pm",
-         "version" : "0.009"
+         "version" : "0.010"
       }
    },
    "release_status" : "stable",
@@ -177,9 +177,10 @@
          "web" : "https://github.com/chazmcgarvey/Dist-Zilla-PluginBundle-Author-CCM"
       }
    },
-   "version" : "0.009",
+   "version" : "0.010",
    "x_authority" : "cpan:CCM",
-   "x_generated_by_perl" : "v5.28.0",
-   "x_serialization_backend" : "Cpanel::JSON::XS version 4.07"
+   "x_generated_by_perl" : "v5.34.1",
+   "x_serialization_backend" : "Cpanel::JSON::XS version 4.27",
+   "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later"
 }
 

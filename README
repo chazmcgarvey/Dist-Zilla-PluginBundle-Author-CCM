@@ -5,7 +5,7 @@ NAME
 
 VERSION
 
-    version 0.009
+    version 0.010
 
 SYNOPSIS
 
@@ -117,6 +117,12 @@ ATTRIBUTES
 
     Specify the minimum perl version. Defaults to 5.10.1.
 
+ no_index
+
+    Set directories to not index.
+
+    Default:
+
  authority
 
     Specify the release authority. Defaults to cpan:CCM.
@@ -159,7 +165,7 @@ BUGS
 
 AUTHOR
 
-    Charles McGarvey <chazmcgarvey@brokenzipper.com>
+    Charles McGarvey <ccm@cpan.org>
 
 COPYRIGHT AND LICENSE
 

@@ -12,9 +12,10 @@ my @files = (
     't/00-compile.t',
     't/00-report-prereqs.dd',
     't/00-report-prereqs.t',
-    't/01-basic.t',
+    't/basic.t',
     'xt/author/clean-namespaces.t',
     'xt/author/critic.t',
+    'xt/author/distmeta.t',
     'xt/author/eol.t',
     'xt/author/minimum-version.t',
     'xt/author/no-tabs.t',
@@ -22,8 +23,7 @@ my @files = (
     'xt/author/pod-no404s.t',
     'xt/author/pod-syntax.t',
     'xt/author/portability.t',
-    'xt/release/cpan-changes.t',
-    'xt/release/distmeta.t'
+    'xt/release/cpan-changes.t'
 );
 
 eol_unix_ok($_, { trailing_whitespace => 1 }) foreach @files;
