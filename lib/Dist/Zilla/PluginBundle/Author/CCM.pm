@@ -302,7 +302,7 @@ sub configure {
         $self->installer,     # e.g. MakeMaker
 
         # RELEASE
-        ['NextRelease'],
+        ['NextRelease' => {format => '%-9v %{yyyy-MM-dd HH:mm:ssZZZ}d%{ (TRIAL RELEASE)}T'}],
         ['CheckChangesHasContent'],
         ['Git::Check' => {allow_dirty => [@allow_dirty], untracked_files => 'ignore'}],
         ['RunExtraTests'],
