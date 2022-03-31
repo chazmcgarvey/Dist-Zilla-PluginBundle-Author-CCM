@@ -1,46 +1,50 @@
 Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
-0.010     2022-03-29 20:09:03-06:00 America/Denver
+0.011     2022-03-31 08:24:44-0600
+
+  * Change NextRelease datetime format
+
+0.010     2022-03-29 20:09:03-0600
 
   * Add no_index option so MetaNoIndex is easily configurable
 
-0.009     2018-11-22 22:46:42-07:00 MST7MDT
+0.009     2018-11-22 22:46:42-0700
 
   * Remove use of DZP::TravisYML and DZP::ReversionOnRelease
 
-0.008001  2017-08-25 22:00:56-06:00 MST7MDT
+0.008001  2017-08-25 22:00:56-0600
 
   * Declare new dependency on Perl::Version
 
-0.008     2017-08-25 21:28:07-06:00 MST7MDT
+0.008     2017-08-25 21:28:07-0600
 
   * Automatically figure out perl_version and perl_version_build TravisYML
     configuration based on configured minimum perl requirement
 
-0.007     2017-03-11 18:33:58-07:00 MST7MDT
+0.007     2017-03-11 18:33:58-0700
 
   * Prevent writing wrong version to Changes
 
-0.006     2016-11-28 02:08:07-07:00 MST7MDT
+0.006     2016-11-28 02:08:07-0700
 
   * Work around a bug in DZP::TravisYML
 
-0.005     2016-11-27 19:52:27-07:00 MST7MDT
+0.005     2016-11-27 19:52:27-0700
 
   * Move dependencies from cpanfile to dist.ini (fixes testing)
   * Set copyright year
 
-0.004     2016-11-27 18:28:43-07:00 MST7MDT
+0.004     2016-11-27 18:28:43-0700
 
   * This bundle now requires at least perl 5.14.0
   * Add Test::MinimumVersion as a release test
 
-0.003     2016-11-26 00:09:53-07:00 MST7MDT
+0.003     2016-11-26 00:09:53-0700
 
   * Set default authority to cpan:CCM
   * Add Test::CPAN::Meta to prereqs
 
-0.002     2016-11-25 22:12:27-07:00 MST7MDT
+0.002     2016-11-25 22:12:27-0700
 
   * Add DZIL_NO_UPLOAD to enable no_upload mode
   * Only rewrite repo README on release
@@ -48,7 +52,7 @@ Revision history for Dist-Zilla-PluginBundle-Author-CCM.
   * Use Bootstrap::lib
   * Require Dist::Zilla 5.038 (for :ExtraTestFiles)
 
-0.001     2016-11-25 18:28:13-07:00 MST7MDT
+0.001     2016-11-25 18:28:13-0700
 
   * Initial version
 

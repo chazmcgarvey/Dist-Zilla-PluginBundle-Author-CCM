@@ -7,7 +7,7 @@ use 5.014;
 use warnings;
 use strict;
 
-our $VERSION = '0.010'; # VERSION
+our $VERSION = '0.011'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
@@ -150,7 +150,7 @@ sub configure {
         $self->installer,     # e.g. MakeMaker
 
         # RELEASE
-        ['NextRelease'],
+        ['NextRelease' => {format => '%-9v %{yyyy-MM-dd HH:mm:ssZZZ}d%{ (TRIAL RELEASE)}T'}],
         ['CheckChangesHasContent'],
         ['Git::Check' => {allow_dirty => [@allow_dirty], untracked_files => 'ignore'}],
         ['RunExtraTests'],
@@ -195,7 +195,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 =head1 VERSION
 
-version 0.010
+version 0.011
 
 =head1 SYNOPSIS
 
