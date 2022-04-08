@@ -7,7 +7,7 @@ use 5.014;
 use warnings;
 use strict;
 
-our $VERSION = '0.011'; # VERSION
+our $VERSION = '0.012'; # VERSION
 
 use Dist::Zilla::Util;
 use Moose;
@@ -88,6 +88,7 @@ sub configure {
     my @git_remotes         = qw(github origin);
     my @check_files         = qw(:InstallModules :ExecFiles :TestFiles :ExtraTestFiles);
     my $perl_version_target = $self->max_target_perl;
+    my $installer           = $self->installer;
 
     if ($self->no_upload) {
         say '[@Author::CCM] WARNING! WARNING! WARNING! *** You are in no_upload mode!! ***';
@@ -147,7 +148,7 @@ sub configure {
         ['Manifest'],
         ['ManifestSkip'],
 
-        $self->installer,     # e.g. MakeMaker
+        $installer ? $self->installer : (), # e.g. MakeMaker
 
         # RELEASE
         ['NextRelease' => {format => '%-9v %{yyyy-MM-dd HH:mm:ssZZZ}d%{ (TRIAL RELEASE)}T'}],
@@ -195,7 +196,7 @@ Dist::Zilla::PluginBundle::Author::CCM - A plugin bundle for distributions built
 
 =head1 VERSION
 
-version 0.011
+version 0.012
 
 =head1 SYNOPSIS
 

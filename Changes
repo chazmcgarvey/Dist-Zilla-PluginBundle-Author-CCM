@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-PluginBundle-Author-CCM.
 
+0.012     2022-04-08 15:53:36-0600
+
+  * Allow no installer
+
 0.011     2022-03-31 08:24:44-0600
 
   * Change NextRelease datetime format
